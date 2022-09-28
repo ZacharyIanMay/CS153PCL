@@ -69,6 +69,21 @@ public class Executor extends Pcl4BaseVisitor<Object>
     @Override 
     public Object visitCaseStatement(Pcl4Parser.CaseStatementContext ctx)
     {
+    	Double value = (Double) visit(ctx.expression());    //get expression
+    	
+    	for (int i = 0; i < ctx.constantList.size(); i++)    //test each constant list
+        {
+    		Pcl4Parser.CaseStatementContext constants = ctx.constantList(i);    //get constants from a constant list
+            
+            for (int j = 0; j < constants.constant.size(); j++)    //test each constant in the constant list
+            {
+            	if (((Double) visit(constants.constant(j))).equals(value))    //test whether constant equals original expression
+                {
+                	return visit(ctx.statement(j));    //evaluate the statement of that constant
+                }
+            }
+        }
+    	
         return null;
     }
 

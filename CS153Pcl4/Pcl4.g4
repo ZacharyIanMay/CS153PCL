@@ -42,7 +42,7 @@ forStatement      : ;
 caseStatement     : CASE expression OF ((constantList ':' statement) (';' constantList ':' statement)*)? END ;
 constantList      : constant (',' constant)* ;
 constant          : STRING
-                  | sign? (IDENTIFIER | number);
+                  | sign? (IDENTIFIER | number) ;
 
 writeStatement   : WRITE writeArgumentsOn ;
 writelnStatement : WRITELN writeArgumentsLn? ;
