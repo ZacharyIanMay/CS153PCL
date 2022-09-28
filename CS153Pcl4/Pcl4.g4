@@ -34,9 +34,15 @@ lhs : variable ;
 rhs : expression ;
 
 whileStatement    : ;
+
 ifStatement		  : ;
+
 forStatement      : ;
-caseStatement     : ;
+
+caseStatement     : CASE expression OF ((constantList ':' statement) (';' constantList ':' statement)*)? END ;
+constantList      : constant (',' constant)* ;
+constant          : STRING
+                  | sign? (IDENTIFIER | number);
 
 writeStatement   : WRITE writeArgumentsOn ;
 writelnStatement : WRITELN writeArgumentsLn? ;
