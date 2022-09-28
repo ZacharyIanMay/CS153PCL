@@ -47,6 +47,30 @@ public class Executor extends Pcl4BaseVisitor<Object>
         
         return null;
     }
+    
+    @Override 
+    public Object visitWhileStatement(Pcl4Parser.WhileStatementContext ctx)
+    {
+        return null;
+    }
+    
+    @Override 
+    public Object visitIfStatement(Pcl4Parser.IfStatementContext ctx)
+    {
+        return null;
+    }
+    
+    @Override 
+    public Object visitForStatement(Pcl4Parser.ForStatementContext ctx)
+    {
+        return null;
+    }
+    
+    @Override 
+    public Object visitCaseStatement(Pcl4Parser.CaseStatementContext ctx)
+    {
+        return null;
+    }
 
     @Override 
     public Object visitWritelnStatement(Pcl4Parser.WritelnStatementContext ctx)
