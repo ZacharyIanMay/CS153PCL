@@ -14,6 +14,10 @@ declarations  : ;
 statement : compoundStatement
           | assignmentStatement
           | repeatStatement
+          | whileStatement
+          | ifStatement
+          | forStatement
+          | caseStatement
           | writeStatement
           | writelnStatement
           | emptyStatement
@@ -28,6 +32,11 @@ repeatStatement     : REPEAT statementList UNTIL expression ;
 
 lhs : variable ;
 rhs : expression ;
+
+whileStatement    : ;
+ifStatement		  : ;
+forStatement      : ;
+caseStatement     : ;
 
 writeStatement   : WRITE writeArgumentsOn ;
 writelnStatement : WRITELN writeArgumentsLn? ;
