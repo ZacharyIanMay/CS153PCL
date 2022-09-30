@@ -59,10 +59,54 @@ public class Executor extends Pcl4BaseVisitor<Object>
     {
         return null;
     }
-    
-    @Override 
-    public Object visitForStatement(Pcl4Parser.ForStatementContext ctx)
+
+    @Override
+    public Object visitForto(Pcl4Parser.FortoContext ctx)
     {
+        //visit variable: returns id or 0
+        //if 0 add new entry to the symtab with value = visit forone
+        //begin while loop with condition to check the value of variable against fortwo
+        //  visit statement
+        //  increment variable
+        SymtabEntry var = symtab.lookup(ctx.variable().getText());
+        if(var == null)
+        {
+            var = symtab.enter(ctx.variable().getText());
+        }
+        double varval = (double)visit(ctx.forOne());
+        var.setValue(varval);
+        double until = (double)visit(ctx.forTwo());
+        while(varval <= until)
+        {
+            visit(ctx.statement());
+            var.setValue(varval+1);
+            varval = (double)visit(ctx.variable());
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitFordownto(Pcl4Parser.FordowntoContext ctx)
+    {
+        //visit variable: returns id or 0
+        //if 0 add new entry to the symtab with value = visit forone
+        //begin while loop with condition to check the value of variable against fortwo
+        //  visit statement
+        //  decrement variable
+        SymtabEntry var = symtab.lookup(ctx.variable().getText());
+        if(var == null)
+        {
+            var = symtab.enter(ctx.variable().getText());
+        }
+        double varval = (double)visit(ctx.forOne());
+        var.setValue(varval);
+        double until = (double)visit(ctx.forTwo());
+        while(varval >= until)
+        {
+            visit(ctx.statement());
+            var.setValue(varval-1);
+            varval = (double)visit(ctx.variable());
+        }
         return null;
     }
     
@@ -70,7 +114,6 @@ public class Executor extends Pcl4BaseVisitor<Object>
     public Object visitCaseStatement(Pcl4Parser.CaseStatementContext ctx)
     {
     	Double value = (Double) visit(ctx.expression());    //get expression
-    	
     	for (int i = 0; i < ctx.constantList.size(); i++)    //test each constant list
         {
     		Pcl4Parser.CaseStatementContext constants = ctx.constantList(i);    //get constants from a constant list
@@ -83,7 +126,6 @@ public class Executor extends Pcl4BaseVisitor<Object>
                 }
             }
         }
-    	
         return null;
     }
 
