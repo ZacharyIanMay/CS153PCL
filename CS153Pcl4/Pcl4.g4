@@ -26,24 +26,24 @@ statement : compoundStatement
 compoundStatement : BEGIN statementList END ;
 emptyStatement    : ;
      
-statementList       : statement ( ';' statement )* ;
+statementList       : statement ( ';' statement (';')?)* ;
 assignmentStatement : lhs ':=' rhs ;
 repeatStatement     : REPEAT statementList UNTIL expression ;
 
 lhs : variable ;
 rhs : expression ;
 
-whileStatement    : ;
+whileStatement    : WHILE expression DO statement END? ;
 
-ifStatement		  : ;
+ifStatement		  : IF expression THEN statement (ELSE statement)? END? ;
 
-forStatement      : FOR variable ':=' forOne (TO) forTwo DO (statement)               # forto
-                  | FOR variable ':=' forOne (DOWNTO) forTwo DO (statement)           # fordownto
+forStatement      : FOR IDENTIFIER ':=' forOne (TO) forTwo DO (statement) END?               # forto
+                  | FOR IDENTIFIER ':=' forOne (DOWNTO) forTwo DO (statement) END?           # fordownto
                   ;
 forOne               : expression;
 forTwo               : expression;
 
-caseStatement     : CASE expression OF ((constantList ':' statement) (';' constantList ':' statement (';')?)*)? END ;
+caseStatement     : CASE expression OF ((constantList ':' statement) (';' constantList ':' statement (';')?)*)? END? ;
 constantList      : constant (',' constant)* ;
 constant          : STRING
                   | sign? (IDENTIFIER | number) ;
