@@ -1,7 +1,6 @@
 package backend.interpreter;
 
 import org.antlr.v4.runtime.ParserRuleContext;
-
 import antlr4.*;
 import intermediate.symtab.*;
 
@@ -65,7 +64,7 @@ public class Executor extends Pcl4BaseVisitor<Object>
     	{
     		visit(ctx.statement(0));
     	} 
-    	else if (ctx.statement.size() > 1) 
+    	else if (ctx.statement().size() > 1) 
     	{
     		visit(ctx.statement(1));
     	}
@@ -126,11 +125,11 @@ public class Executor extends Pcl4BaseVisitor<Object>
     public Object visitCaseStatement(Pcl4Parser.CaseStatementContext ctx)
     {
     	Double value = (Double) visit(ctx.expression());    //get expression
-    	for (int i = 0; i < ctx.constantList.size(); i++)    //test each constant list
+    	for (int i = 0; i < ctx.constantList().size(); i++)    //test each constant list
         {
-    		Pcl4Parser.CaseStatementContext constants = ctx.constantList(i);    //get constants from a constant list
+    		Pcl4Parser.ConstantListContext constants = ctx.constantList(i);    //get constants from a constant list
             
-            for (int j = 0; j < constants.constant.size(); j++)    //test each constant in the constant list
+            for (int j = 0; j < constants.constant().size(); j++)    //test each constant in the constant list
             {
             	if (((Double) visit(constants.constant(j))).equals(value))    //test whether constant equals original expression
                 {
