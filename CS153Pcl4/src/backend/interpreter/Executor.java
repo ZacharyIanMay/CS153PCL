@@ -57,6 +57,14 @@ public class Executor extends Pcl4BaseVisitor<Object>
     @Override 
     public Object visitIfStatement(Pcl4Parser.IfStatementContext ctx)
     {
+    	if ((Boolean) visit(ctx.expression())) 
+    	{
+    		visit(ctx.statement(0));
+    	} 
+    	else if (ctx.statement.size() > 1) 
+    	{
+    		visit(ctx.statement(1));
+    	}
         return null;
     }
 
