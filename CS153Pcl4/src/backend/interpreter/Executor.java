@@ -51,6 +51,10 @@ public class Executor extends Pcl4BaseVisitor<Object>
     @Override 
     public Object visitWhileStatement(Pcl4Parser.WhileStatementContext ctx)
     {
+    	while ((Boolean) visit(ctx.expression()))
+    	{
+    		visit(ctx.statement());
+    	}
         return null;
     }
     
