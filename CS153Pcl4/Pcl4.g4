@@ -37,8 +37,8 @@ whileStatement    : WHILE expression DO statement ;
 
 ifStatement		  : IF expression THEN statement (ELSE statement)? ;
 
-forStatement      : FOR IDENTIFIER ':=' forOne (TO) forTwo DO (statement)               # forto
-                  | FOR IDENTIFIER ':=' forOne (DOWNTO) forTwo DO (statement)            # fordownto
+forStatement      : FOR variable ':=' forOne (TO) forTwo DO (statement)               # forto
+                  | FOR variable ':=' forOne (DOWNTO) forTwo DO (statement)            # fordownto
                   ;
 forOne               : expression;
 forTwo               : expression;
