@@ -33,17 +33,17 @@ repeatStatement     : REPEAT statementList UNTIL expression ;
 lhs : variable ;
 rhs : expression ;
 
-whileStatement    : WHILE expression DO statement END? ;
+whileStatement    : WHILE expression DO statement ;
 
-ifStatement		  : IF expression THEN statement (ELSE statement)? END? ;
+ifStatement		  : IF expression THEN statement (ELSE statement)? ;
 
-forStatement      : FOR IDENTIFIER ':=' forOne (TO) forTwo DO (statement) END?               # forto
-                  | FOR IDENTIFIER ':=' forOne (DOWNTO) forTwo DO (statement) END?           # fordownto
+forStatement      : FOR IDENTIFIER ':=' forOne (TO) forTwo DO (statement)               # forto
+                  | FOR IDENTIFIER ':=' forOne (DOWNTO) forTwo DO (statement)            # fordownto
                   ;
 forOne               : expression;
 forTwo               : expression;
 
-caseStatement     : CASE expression OF ((constantList ':' statement) (';' constantList ':' statement (';')?)*)? END? ;
+caseStatement     : CASE expression OF ((constantList ':' statement) (';' constantList ':' statement (';')?)*)? ;
 constantList      : constant (',' constant)* ;
 constant          : STRING
                   | sign? (IDENTIFIER | number) ;
