@@ -37,11 +37,9 @@ whileStatement    : WHILE expression DO statement ;
 
 ifStatement		  : IF expression THEN statement (ELSE statement)? ;
 
-forStatement      : FOR variable ':=' forOne (TO) forTwo DO (statement)               # forto
-                  | FOR variable ':=' forOne (DOWNTO) forTwo DO (statement)            # fordownto
+forStatement      : FOR variable ':=' expression (TO) expression DO (statement)               # forto
+                  | FOR variable ':=' expression (DOWNTO) expression DO (statement)            # fordownto
                   ;
-forOne               : expression;
-forTwo               : expression;
 
 caseStatement     : CASE expression OF ((constantList ':' statement) (';' constantList ':' statement (';')?)*)? ;
 constantList      : constant (',' constant)* ;
