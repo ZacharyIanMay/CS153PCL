@@ -26,7 +26,7 @@ statement : compoundStatement
 compoundStatement : BEGIN statementList END ;
 emptyStatement    : ;
      
-statementList       : statement ( ';' statement (';')?)* ;
+statementList       : statement ( ';' statement )* ;
 assignmentStatement : lhs ':=' rhs ;
 repeatStatement     : REPEAT statementList UNTIL expression ;
 
@@ -41,7 +41,7 @@ forStatement      : FOR variable ':=' expression (TO) expression DO (statement) 
                   | FOR variable ':=' expression (DOWNTO) expression DO (statement)            # fordownto
                   ;
 
-caseStatement     : CASE expression OF ((constantList ':' statement) (';' constantList ':' statement (';')?)*)? ;
+caseStatement     : CASE expression OF ((constantList ':' statement) (';' constantList ':' statement )*)? (';')? END ;
 constantList      : constant (',' constant)* ;
 constant          : STRING
                   | sign? (IDENTIFIER | number) ;
