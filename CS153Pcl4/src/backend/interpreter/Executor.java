@@ -135,7 +135,7 @@ public class Executor extends Pcl4BaseVisitor<Object>
             {
             	if (((Double) visit(constants.constant(j))).equals(value))    //test whether constant equals original expression
                 {
-                	return visit(ctx.statement(j));    //evaluate the statement of that constant
+                	return visit(ctx.statement(i));    //evaluate the statement of that constant
                 }
             }
         }
