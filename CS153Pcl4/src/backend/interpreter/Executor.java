@@ -1,6 +1,8 @@
 package backend.interpreter;
 
-import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.*;
+import org.antlr.v4.runtime.*;
+//import org.antlr.v4.runtime.ParserRuleContext;
 import antlr4.*;
 import intermediate.symtab.*;
 
@@ -84,9 +86,9 @@ public class Executor extends Pcl4BaseVisitor<Object>
         {
             var = symtab.enter(ctx.variable().getText());
         }
-        double varval = (double)visit(ctx.forOne());
+        double varval = (double)visit(ctx.expression(0));
         var.setValue(varval);
-        double until = (double)visit(ctx.forTwo());
+        double until = (double)visit(ctx.expression(1));
         while(varval <= until)
         {
             visit(ctx.statement());
@@ -109,9 +111,9 @@ public class Executor extends Pcl4BaseVisitor<Object>
         {
             var = symtab.enter(ctx.variable().getText());
         }
-        double varval = (double)visit(ctx.forOne());
+        double varval = (double)visit(ctx.expression(0));
         var.setValue(varval);
-        double until = (double)visit(ctx.forTwo());
+        double until = (double)visit(ctx.expression(1));
         while(varval >= until)
         {
             visit(ctx.statement());
